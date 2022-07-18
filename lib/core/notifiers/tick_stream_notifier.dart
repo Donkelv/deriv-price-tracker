@@ -37,9 +37,9 @@ class TickStreamNotifier extends StateNotifier<TickState> {
     channel.sink.add(json.encode({"ticks": tick, "subscribe": 1}));
   }
 
-  forgetSuscription(){
-    channel.sink.add(json.encode({"forget": ref.watch(subscriptionIdProvider)}));
-  }
+  // forgetSuscription(){
+  //   channel.sink.add(json.encode({"forget": ref.watch(subscriptionIdProvider)}));
+  // }
 }
 
 final tickStreamProvider =

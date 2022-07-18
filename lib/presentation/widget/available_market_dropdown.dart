@@ -1,3 +1,4 @@
+import 'package:deriv_price_tracker/core/notifiers/forget_subscription_notifier.dart';
 import 'package:deriv_price_tracker/core/notifiers/tick_stream_notifier.dart';
 import 'package:deriv_price_tracker/core/providers/subscription_id_provider.dart';
 import 'package:deriv_price_tracker/data/models/active_symbol_model.dart';
@@ -65,7 +66,7 @@ class _AvailableMarketDropdownWidgetState
                   .watch(tickStreamProvider.notifier)
                   .getTicks(tick: selectedSymbol!);
               ref.read(subscriptionIdProvider)!.isNotEmpty
-                  ? ref.watch(tickStreamProvider.notifier).forgetSuscription()
+                  ? ref.watch(forgetSubscriptionProvider.notifier).forgetSuscription()
                   : null;
               //ref.watch(provider)
             },
