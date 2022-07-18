@@ -1,4 +1,5 @@
 import 'package:deriv_price_tracker/core/notifiers/tick_stream_notifier.dart';
+import 'package:deriv_price_tracker/core/providers/subscription_id_provider.dart';
 import 'package:deriv_price_tracker/data/models/active_symbol_model.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
@@ -32,8 +33,7 @@ class _AvailableMarketDropdownWidgetState
       ),
       alignment: Alignment.center,
       padding: EdgeInsets.symmetric(horizontal: 30.0.w),
-      child: Consumer(
-        builder: (context, ref, child) {
+      child: Consumer(builder: (context, ref, child) {
         return DropdownButtonHideUnderline(
           child: DropdownButton2<String>(
             isExpanded: true,
@@ -59,8 +59,14 @@ class _AvailableMarketDropdownWidgetState
                 selectedSymbol = value;
               });
               debugPrint(selectedSymbol!);
+              
 
-              ref.watch(tickStreamProvider.notifier).getTicks(tick: selectedSymbol!);
+              ref
+                  .watch(tickStreamProvider.notifier)
+                  .getTicks(tick: selectedSymbol!);
+              ref.read(subscriptionIdProvider)!.isNotEmpty
+                  ? ref.watch(tickStreamProvider.notifier).forgetSuscription()
+                  : null;
               //ref.watch(provider)
             },
             buttonHeight: 40,
