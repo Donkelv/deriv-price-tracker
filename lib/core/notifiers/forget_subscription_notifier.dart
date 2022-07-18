@@ -1,7 +1,3 @@
-
-
-
-
 import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
@@ -19,6 +15,7 @@ class ForgetSubscriptionNotifier extends ChangeNotifier {
       Uri.parse("wss://ws.binaryws.com/websockets/v3?app_id=1089"));
 
   forgetSuscription() {
+    channel.stream.map((event) => print(event));
     channel.sink
         .add(json.encode({"forget": ref.watch(subscriptionIdProvider)}));
   }

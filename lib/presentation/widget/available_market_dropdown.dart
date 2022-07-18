@@ -8,6 +8,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../core/notifiers/previous_tick_notifier.dart';
+
 class AvailableMarketDropdownWidget extends StatefulWidget {
   final AsyncSnapshot<ActiveSymbolModel>? snapshhot;
   const AvailableMarketDropdownWidget({Key? key, this.snapshhot})
@@ -60,15 +62,18 @@ class _AvailableMarketDropdownWidgetState
                 selectedSymbol = value;
               });
               debugPrint(selectedSymbol!);
-              
-
-              ref
-                  .watch(tickStreamProvider.notifier)
-                  .getTicks(tick: selectedSymbol!);
-              ref.read(subscriptionIdProvider)!.isNotEmpty
-                  ? ref.watch(forgetSubscriptionProvider.notifier).forgetSuscription()
-                  : null;
-              //ref.watch(provider)
+                
+              ref.watch(previousTickListNotifier.notifier).clearTickList();
+              if(  ref.read(subscriptionIdProvider) != null){
+                ref.watch(tickStreamProvider.notifier).forgetSuscription(tick: selectedSymbol!);
+                 //ref.watch(tickStreamProvider.notifier).getTickStream();
+              } else {
+                ref
+                    .watch(tickStreamProvider.notifier)
+                    .getTicks(tick: selectedSymbol!);
+              }
+            
+             
             },
             buttonHeight: 40,
             buttonWidth: 140,

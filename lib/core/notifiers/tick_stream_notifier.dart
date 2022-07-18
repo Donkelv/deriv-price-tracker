@@ -23,23 +23,35 @@ class TickStreamNotifier extends StateNotifier<TickState> {
     state = const TickState.loading();
     return channel.stream.listen(
       (event) {
-        ref.read(subscriptionIdProvider.notifier).state =
-            TickStreamModel.fromJson(jsonDecode(event)).subscription!.id!;
-        ref.watch(priceStatusProvider.notifier).compare(
-            tick: TickStreamModel.fromJson(jsonDecode(event)).tick!.quote!);
-        state =
-            TickState.loaded(data: TickStreamModel.fromJson(jsonDecode(event)));
+        if (TickStreamModel.fromJson(jsonDecode(event)).msgType == "tick") {
+          print(event);
+          ref.read(subscriptionIdProvider.notifier).state =
+              TickStreamModel.fromJson(jsonDecode(event)).subscription!.id!;
+          ref.watch(priceStatusProvider.notifier).compare(
+              tick: TickStreamModel.fromJson(jsonDecode(event)).tick!.quote!);
+          if (mounted) {
+            state = TickState.loaded(
+                data: TickStreamModel.fromJson(jsonDecode(event)));
+          }
+        } else {
+          print(event);
+          state = const TickState.loading();
+        }
       },
     );
   }
 
   getTicks({required String tick}) {
     channel.sink.add(json.encode({"ticks": tick, "subscribe": 1}));
+    // channel.sink.close();
   }
 
-  // forgetSuscription(){
-  //   channel.sink.add(json.encode({"forget": ref.watch(subscriptionIdProvider)}));
-  // }
+  forgetSuscription({required String tick}) {
+    getTickStream();
+    channel.sink
+        .add(json.encode({"forget": ref.watch(subscriptionIdProvider)}));
+    channel.sink.add(json.encode({"ticks": tick, "subscribe": 1}));
+  }
 }
 
 final tickStreamProvider =
