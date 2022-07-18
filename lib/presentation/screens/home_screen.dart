@@ -112,7 +112,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                     TickPriceStatus.lower ? Colors.red  : Color.fromARGB(255, 209, 207, 207)),
                       ),
                     );
+
                   },
+                  error: (error){
+                     return Center(
+                    child: Text(
+                      error,
+                      style: TextStyle(fontSize: 15.0.sp),
+                    ),
+                  );
+                  }
                 );
               })
             ],

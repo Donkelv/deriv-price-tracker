@@ -6,6 +6,7 @@ import 'package:deriv_price_tracker/core/notifiers/price_status_notifier.dart';
 import 'package:deriv_price_tracker/core/notifiers/web_socket_channel.dart';
 import 'package:deriv_price_tracker/core/providers/subscription_id_provider.dart';
 import 'package:deriv_price_tracker/core/states/tick_state.dart';
+import 'package:deriv_price_tracker/data/models/error_msg_model.dart';
 import 'package:deriv_price_tracker/data/models/tick_stream_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,21 +25,29 @@ class TickStreamNotifier extends StateNotifier<TickState> {
     return channel.stream.listen(
       (event) {
         if (TickStreamModel.fromJson(jsonDecode(event)).msgType == "tick") {
-          print(event);
-          ref.read(subscriptionIdProvider.notifier).state =
-              TickStreamModel.fromJson(jsonDecode(event)).subscription!.id!;
-          ref.watch(priceStatusProvider.notifier).compare(
-              tick: TickStreamModel.fromJson(jsonDecode(event)).tick!.quote!);
-          if (mounted) {
-            state = TickState.loaded(
-                data: TickStreamModel.fromJson(jsonDecode(event)));
+          if(TickStreamModel.fromJson(jsonDecode(event)).tick != null){
+            print(event);
+            ref.read(subscriptionIdProvider.notifier).state =
+                TickStreamModel.fromJson(jsonDecode(event)).subscription!.id!;
+            ref.watch(priceStatusProvider.notifier).compare(
+                tick: TickStreamModel.fromJson(jsonDecode(event)).tick!.quote!);
+            if (mounted) {
+              state = TickState.loaded(
+                  data: TickStreamModel.fromJson(jsonDecode(event)));
+            }
+          } else {
+            state = TickState.error(ErrorMessage.fromJson(jsonDecode(event)).error!.message!);
           }
+          
         } else {
           print(event);
           state = const TickState.loading();
         }
       },
-    );
+    ).onError((error) {
+      print(error);
+      state = TickState.error(error);
+    });
   }
 
   getTicks({required String tick}) {

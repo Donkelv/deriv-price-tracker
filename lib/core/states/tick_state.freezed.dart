@@ -21,6 +21,7 @@ mixin _$TickState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(TickStreamModel data) loaded,
+    required TResult Function(String error) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$TickState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(TickStreamModel data)? loaded,
+    TResult Function(String error)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$TickState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(TickStreamModel data)? loaded,
+    TResult Function(String error)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$TickState {
     required TResult Function(_$TickStateInitial value) initial,
     required TResult Function(_$TickStateLoading value) loading,
     required TResult Function(_$TickStateLoaded value) loaded,
+    required TResult Function(_$TickStateError value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$TickState {
     TResult Function(_$TickStateInitial value)? initial,
     TResult Function(_$TickStateLoading value)? loading,
     TResult Function(_$TickStateLoaded value)? loaded,
+    TResult Function(_$TickStateError value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$TickState {
     TResult Function(_$TickStateInitial value)? initial,
     TResult Function(_$TickStateLoading value)? loading,
     TResult Function(_$TickStateLoaded value)? loaded,
+    TResult Function(_$TickStateError value)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -121,6 +127,7 @@ class _$_$TickStateInitial implements _$TickStateInitial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(TickStreamModel data) loaded,
+    required TResult Function(String error) error,
   }) {
     return initial();
   }
@@ -131,6 +138,7 @@ class _$_$TickStateInitial implements _$TickStateInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(TickStreamModel data)? loaded,
+    TResult Function(String error)? error,
   }) {
     return initial?.call();
   }
@@ -141,6 +149,7 @@ class _$_$TickStateInitial implements _$TickStateInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(TickStreamModel data)? loaded,
+    TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -155,6 +164,7 @@ class _$_$TickStateInitial implements _$TickStateInitial {
     required TResult Function(_$TickStateInitial value) initial,
     required TResult Function(_$TickStateLoading value) loading,
     required TResult Function(_$TickStateLoaded value) loaded,
+    required TResult Function(_$TickStateError value) error,
   }) {
     return initial(this);
   }
@@ -165,6 +175,7 @@ class _$_$TickStateInitial implements _$TickStateInitial {
     TResult Function(_$TickStateInitial value)? initial,
     TResult Function(_$TickStateLoading value)? loading,
     TResult Function(_$TickStateLoaded value)? loaded,
+    TResult Function(_$TickStateError value)? error,
   }) {
     return initial?.call(this);
   }
@@ -175,6 +186,7 @@ class _$_$TickStateInitial implements _$TickStateInitial {
     TResult Function(_$TickStateInitial value)? initial,
     TResult Function(_$TickStateLoading value)? loading,
     TResult Function(_$TickStateLoaded value)? loaded,
+    TResult Function(_$TickStateError value)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -232,6 +244,7 @@ class _$_$TickStateLoading implements _$TickStateLoading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(TickStreamModel data) loaded,
+    required TResult Function(String error) error,
   }) {
     return loading();
   }
@@ -242,6 +255,7 @@ class _$_$TickStateLoading implements _$TickStateLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(TickStreamModel data)? loaded,
+    TResult Function(String error)? error,
   }) {
     return loading?.call();
   }
@@ -252,6 +266,7 @@ class _$_$TickStateLoading implements _$TickStateLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(TickStreamModel data)? loaded,
+    TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -266,6 +281,7 @@ class _$_$TickStateLoading implements _$TickStateLoading {
     required TResult Function(_$TickStateInitial value) initial,
     required TResult Function(_$TickStateLoading value) loading,
     required TResult Function(_$TickStateLoaded value) loaded,
+    required TResult Function(_$TickStateError value) error,
   }) {
     return loading(this);
   }
@@ -276,6 +292,7 @@ class _$_$TickStateLoading implements _$TickStateLoading {
     TResult Function(_$TickStateInitial value)? initial,
     TResult Function(_$TickStateLoading value)? loading,
     TResult Function(_$TickStateLoaded value)? loaded,
+    TResult Function(_$TickStateError value)? error,
   }) {
     return loading?.call(this);
   }
@@ -286,6 +303,7 @@ class _$_$TickStateLoading implements _$TickStateLoading {
     TResult Function(_$TickStateInitial value)? initial,
     TResult Function(_$TickStateLoading value)? loading,
     TResult Function(_$TickStateLoaded value)? loaded,
+    TResult Function(_$TickStateError value)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -367,6 +385,7 @@ class _$_$TickStateLoaded implements _$TickStateLoaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(TickStreamModel data) loaded,
+    required TResult Function(String error) error,
   }) {
     return loaded(data);
   }
@@ -377,6 +396,7 @@ class _$_$TickStateLoaded implements _$TickStateLoaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(TickStreamModel data)? loaded,
+    TResult Function(String error)? error,
   }) {
     return loaded?.call(data);
   }
@@ -387,6 +407,7 @@ class _$_$TickStateLoaded implements _$TickStateLoaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(TickStreamModel data)? loaded,
+    TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -401,6 +422,7 @@ class _$_$TickStateLoaded implements _$TickStateLoaded {
     required TResult Function(_$TickStateInitial value) initial,
     required TResult Function(_$TickStateLoading value) loading,
     required TResult Function(_$TickStateLoaded value) loaded,
+    required TResult Function(_$TickStateError value) error,
   }) {
     return loaded(this);
   }
@@ -411,6 +433,7 @@ class _$_$TickStateLoaded implements _$TickStateLoaded {
     TResult Function(_$TickStateInitial value)? initial,
     TResult Function(_$TickStateLoading value)? loading,
     TResult Function(_$TickStateLoaded value)? loaded,
+    TResult Function(_$TickStateError value)? error,
   }) {
     return loaded?.call(this);
   }
@@ -421,6 +444,7 @@ class _$_$TickStateLoaded implements _$TickStateLoaded {
     TResult Function(_$TickStateInitial value)? initial,
     TResult Function(_$TickStateLoading value)? loading,
     TResult Function(_$TickStateLoaded value)? loaded,
+    TResult Function(_$TickStateError value)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -437,5 +461,151 @@ abstract class _$TickStateLoaded implements TickState {
   TickStreamModel get data;
   @JsonKey(ignore: true)
   _$$_$TickStateLoadedCopyWith<_$_$TickStateLoaded> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_$TickStateErrorCopyWith<$Res> {
+  factory _$$_$TickStateErrorCopyWith(
+          _$_$TickStateError value, $Res Function(_$_$TickStateError) then) =
+      __$$_$TickStateErrorCopyWithImpl<$Res>;
+  $Res call({String error});
+}
+
+/// @nodoc
+class __$$_$TickStateErrorCopyWithImpl<$Res>
+    extends _$TickStateCopyWithImpl<$Res>
+    implements _$$_$TickStateErrorCopyWith<$Res> {
+  __$$_$TickStateErrorCopyWithImpl(
+      _$_$TickStateError _value, $Res Function(_$_$TickStateError) _then)
+      : super(_value, (v) => _then(v as _$_$TickStateError));
+
+  @override
+  _$_$TickStateError get _value => super._value as _$_$TickStateError;
+
+  @override
+  $Res call({
+    Object? error = freezed,
+  }) {
+    return _then(_$_$TickStateError(
+      error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_$TickStateError implements _$TickStateError {
+  const _$_$TickStateError(this.error);
+
+  @override
+  final String error;
+
+  @override
+  String toString() {
+    return 'TickState.error(error: $error)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_$TickStateError &&
+            const DeepCollectionEquality().equals(other.error, error));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(error));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_$TickStateErrorCopyWith<_$_$TickStateError> get copyWith =>
+      __$$_$TickStateErrorCopyWithImpl<_$_$TickStateError>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(TickStreamModel data) loaded,
+    required TResult Function(String error) error,
+  }) {
+    return error(this.error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(TickStreamModel data)? loaded,
+    TResult Function(String error)? error,
+  }) {
+    return error?.call(this.error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(TickStreamModel data)? loaded,
+    TResult Function(String error)? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this.error);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_$TickStateInitial value) initial,
+    required TResult Function(_$TickStateLoading value) loading,
+    required TResult Function(_$TickStateLoaded value) loaded,
+    required TResult Function(_$TickStateError value) error,
+  }) {
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_$TickStateInitial value)? initial,
+    TResult Function(_$TickStateLoading value)? loading,
+    TResult Function(_$TickStateLoaded value)? loaded,
+    TResult Function(_$TickStateError value)? error,
+  }) {
+    return error?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_$TickStateInitial value)? initial,
+    TResult Function(_$TickStateLoading value)? loading,
+    TResult Function(_$TickStateLoaded value)? loaded,
+    TResult Function(_$TickStateError value)? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _$TickStateError implements TickState {
+  const factory _$TickStateError(final String error) = _$_$TickStateError;
+
+  String get error;
+  @JsonKey(ignore: true)
+  _$$_$TickStateErrorCopyWith<_$_$TickStateError> get copyWith =>
       throw _privateConstructorUsedError;
 }
