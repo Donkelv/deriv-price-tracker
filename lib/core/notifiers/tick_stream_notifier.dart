@@ -1,14 +1,9 @@
 import 'dart:convert';
-import 'dart:math';
-
-import 'package:deriv_price_tracker/core/notifiers/previous_tick_notifier.dart';
 import 'package:deriv_price_tracker/core/notifiers/price_status_notifier.dart';
-import 'package:deriv_price_tracker/core/notifiers/web_socket_channel.dart';
 import 'package:deriv_price_tracker/core/providers/subscription_id_provider.dart';
 import 'package:deriv_price_tracker/core/states/tick_state.dart';
 import 'package:deriv_price_tracker/data/models/error_msg_model.dart';
 import 'package:deriv_price_tracker/data/models/tick_stream_model.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:web_socket_channel/src/channel.dart';
 
@@ -22,25 +17,25 @@ class TickStreamNotifier extends StateNotifier<TickState> {
 
   getTickStream() {
     state = const TickState.loading();
-    return channel.stream.listen(
+    return channel.stream.asBroadcastStream().listen(
       (event) {
         if (TickStreamModel.fromJson(jsonDecode(event)).msgType == "tick") {
-          if(TickStreamModel.fromJson(jsonDecode(event)).tick != null){
+          if (TickStreamModel.fromJson(jsonDecode(event)).tick != null) {
             print(event);
             ref.read(subscriptionIdProvider.notifier).state =
                 TickStreamModel.fromJson(jsonDecode(event)).subscription!.id!;
             ref.watch(priceStatusProvider.notifier).compare(
                 tick: TickStreamModel.fromJson(jsonDecode(event)).tick!.quote!);
-            if (mounted) {
-              state = TickState.loaded(
-                  data: TickStreamModel.fromJson(jsonDecode(event)));
-            }
+            if (!mounted) return;
+            state = TickState.loaded(
+                data: TickStreamModel.fromJson(jsonDecode(event)));
           } else {
-            state = TickState.error(ErrorMessage.fromJson(jsonDecode(event)).error!.message!);
+            state = TickState.error(
+                ErrorMessage.fromJson(jsonDecode(event)).error!.message!);
           }
-          
         } else {
           print(event);
+          if (!mounted) return;
           state = const TickState.loading();
         }
       },
@@ -52,14 +47,20 @@ class TickStreamNotifier extends StateNotifier<TickState> {
 
   getTicks({required String tick}) {
     channel.sink.add(json.encode({"ticks": tick, "subscribe": 1}));
-    // channel.sink.close();
   }
 
-  forgetSuscription({required String tick}) {
-    getTickStream();
+  forgetSuscription({
+    required String tick,
+  }) {
     channel.sink
         .add(json.encode({"forget": ref.watch(subscriptionIdProvider)}));
+    channel.sink.close();
+    // channel.sink.addStream()
+     getTickStream();
+    // print("right before adding tick");
     channel.sink.add(json.encode({"ticks": tick, "subscribe": 1}));
+    // print("right after adding tick");
+   
   }
 }
 

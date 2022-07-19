@@ -60,20 +60,29 @@ class _AvailableMarketDropdownWidgetState
             onChanged: (String? value) {
               setState(() {
                 selectedSymbol = value;
+                
               });
               debugPrint(selectedSymbol!);
-                
+
               ref.watch(previousTickListNotifier.notifier).clearTickList();
-              if(  ref.read(subscriptionIdProvider) != null){
-                ref.watch(tickStreamProvider.notifier).forgetSuscription(tick: selectedSymbol!);
-                 //ref.watch(tickStreamProvider.notifier).getTickStream();
+              if (ref.read(subscriptionIdProvider) != null) {
+                // ref
+                //     .watch(tickStreamProvider.notifier)
+                //     .getTicks(tick: selectedSymbol!);
+                // ref.watch(tickStreamProvider.notifier).getTickStream();
+                
+                ref
+                    .watch(tickStreamProvider.notifier)
+                    .forgetSuscription(tick: selectedSymbol!);
               } else {
                 ref
                     .watch(tickStreamProvider.notifier)
                     .getTicks(tick: selectedSymbol!);
               }
-            
-             
+
+              ref
+                  .watch(tickStreamProvider.notifier)
+                  .getTicks(tick: selectedSymbol!);
             },
             buttonHeight: 40,
             buttonWidth: 140,
